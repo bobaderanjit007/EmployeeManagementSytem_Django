@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col col-lg-4 m-auto mt-5 p-2">
+    <h2 class="m-4 text-center">Add Department</h2>
+    <form class="row g-3" method="POST">
+        {% csrf_token %}
+        <div class="col-md-12">
+            <label for="inputPassword4" class="form-label">Department Name</label>
+            <input type="name" name="name" class="form-control" id="inputName" required>
+        </div>
+        <div class="col-md-12">
+            <label for="inputEmail4" class="form-label">Floor</label>
+            <input type="number" name="floor" class="form-control" id="inputFloor" required>
+        </div>
+        
+        <div class="col-12 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

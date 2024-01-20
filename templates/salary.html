@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-8 m-auto">
+            <h2 class="text-center mt-2">Salary</h2>
+            <table class="table table-striped table-hover mt-4">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">From </th>
+                    <th scope="col">To</th>
+                </tr>
+                {% for sal in salary %}
+                <tr>
+                    <th>{{sal.id}}</th>
+                    <td>{{sal.employee}}</td>
+                    <td>{{sal.salary}}</td>
+                    <td>{{sal.start_date}}</td>
+                    <td>{{sal.end_date}}</td>
+                    {% comment %} <td><button class="btn btn-sm btn-info">Edit</button></td>
+                    <td><button class="btn btn-sm btn-danger">delete</button></td> {% endcomment %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

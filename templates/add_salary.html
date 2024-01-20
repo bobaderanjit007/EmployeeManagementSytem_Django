@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col col-lg-4 m-auto mt-5 p-2">
+    <h2 class="m-4 text-center">Give Salary</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  
+  <div class="form-group">
+    <label for="id_employee">Employee</label>
+    <select class="form-control" id="id_employee" name="employee">
+      <!-- Include options for employees -->
+      {% for employee in employees %}
+        <option value="{{ employee.id }}">{{ employee.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="id_salary">Salary</label>
+    <input type="number" class="form-control" id="id_salary" name="salary">
+  </div>
+  
+  <div class="form-group">
+    <label for="id_start_date">Start Date:</label>
+    <input type="date" class="form-control" id="id_start_date" name="start_date">
+  </div>
+  
+  <div class="form-group">
+    <label for="id_end_date">End Date:</label>
+    <input type="date" class="form-control" id="id_end_date" name="end_date">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+    </div>
+</div>
+</div>
+
+{% endblock content %}
