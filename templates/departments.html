@@ -12,14 +12,16 @@
                     <th scope="col">Flore</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Remove</th>
+                    <th scope="col">Check</th>
                 </tr>
                 {% for department in departments %}
                 <tr>
                     <th>{{department.id}}</th>
                     <td>{{department.name}}</td>
                     <td>{{department.floor}}</td>
-                    <td><button class="btn btn-sm btn-info">Edit</button></td>
-                    <td><button class="btn btn-sm btn-danger">delete</button></td>
+                    <td><a href="/edit/department/{{department.id}}" class="btn btn-sm btn-info">Edit</a></td>
+                    <td><a href="/delete/department/{{department.id}}" class="btn btn-sm btn-danger">delete</a></td>
+                    <td><a href="/hierarchy/{{department.id}}" class="btn btn-sm btn-success">Hierarchy</a></td>
                 </tr>
                 {% endfor %}
             </table>

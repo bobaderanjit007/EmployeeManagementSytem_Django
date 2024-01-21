@@ -4,18 +4,24 @@
 <div class="container">
     <div class="row">
         <div class="col col-lg-12 m-auto">
-            <h2 class="text-center mt-2">Employees</h2>
-            <table class="table table-striped table-hover mt-4">
+            <h2 class="text-center mt-2">Check Hierarchy</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col col-lg-10">
+                        <h2>Department : {{department}}</h2>
+                        <h3>Manager : {{manager}}</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <h4 class=" mt-4">Employees : </h4>
+            <table class="table table-striped table-hover">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Designation</th>
-                    <th scope="col">Report Manager</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Remove</th>
                 </tr>
                 {% for employee in employees %}
                 <tr>
@@ -24,10 +30,6 @@
                     <td>{{employee.email}}</td>
                     <td>{{employee.address}}</td>
                     <td>{{employee.designation}}</td>
-                    <td>{{employee.reporting_manager}}</td>
-                    <td>{{employee.department}}</td>
-                    <td><a href="/edit/employee/{{employee.id}}" class="btn btn-sm btn-info">Edit</a></td>
-                    <td><a href="/delete/employee/{{employee.id}}" class="btn btn-sm btn-danger">delete</a></td>
                 </tr>
                 {% endfor %}
             </table>

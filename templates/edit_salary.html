@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col col-lg-4 m-auto mt-5 p-2">
+    <h2 class="m-4 text-center">Update Salary</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  
+  <div class="form-group">
+    <label for="id_employee">Employee</label>
+    <input type="name" class="form-control" readonly="true" value="{{employee.employee}}" id="id_employee" name="employee" required>
+    <input type="hidden" class="form-control" readonly="true" value="{{employee.employee.id}}" id="id_employee" name="employee_id" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="id_salary">Salary</label>
+    <input type="number" value="{{employee.salary}}" class="form-control" id="id_salary" name="salary" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="id_start_date">Start Date:</label>
+    <input type="date" value="{{employee.start_date|date:'Y-m-d'}}" class="form-control" id="id_start_date" name="start_date" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="id_end_date">End Date:</label>
+    <input type="date" value="{{employee.end_date|date:'Y-m-d'}}" class="form-control" id="id_end_date" name="end_date" required>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Update Salary</button>
+</form>
+
+    </div>
+</div>
+</div>
+
+{% endblock content %}
