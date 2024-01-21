@@ -6,7 +6,7 @@ from django.db.models import Sum
 # Create your views here.
 
 def home(request):
-    return render(request, "base.html")
+    return render(request, "home.html")
 
 # Employee Module
 
@@ -19,6 +19,7 @@ def add_emp(request):
         designation = request.POST['designation']
         report_to = request.POST['reportto']
         department_id = request.POST['department']
+
         report_manager = Employee.objects.get(id = report_to)
         department = Department.objects.get(id = department_id)
         employee = Employee(name=name, email=email, address = address,
@@ -231,51 +232,39 @@ def dep_salary(request):
         start_date = request.POST['start_date']
         end_date = request.POST['end_date']
 
-        # Get all departments
         all_departments = Department.objects.all()
 
-        # Use aggregation to calculate the total salary for each department within the specified date range
         department_totals = EmployeeSalary.objects.filter(
             start_date__gte=start_date,
             end_date__lte=end_date
         ).values('employee__department__name').annotate(total_salary=Sum('salary'))
 
-        # Create a dictionary to store total salary for each department
         department_totals_dict = {entry['employee__department__name']: entry['total_salary'] for entry in department_totals}
 
-        # Add departments with zero total salary
         for department in all_departments:
             department_name = department.name
             if department_name not in department_totals_dict:
                 department_totals_dict[department_name] = 0
 
-        # Create a list of dictionaries to pass to the template
         department_totals_list = [{'department_name': department_name, 'total_salary': total_salary} for department_name, total_salary in department_totals_dict.items()]
 
-        # Assuming you want to display the results in a template
         return render(request, "dep_salary.html", {'departments': department_totals_list})
 
     else:
         
-        # Get all departments
         all_departments = Department.objects.all()
 
-        # Use aggregation to calculate the total salary for each department
         department_totals = EmployeeSalary.objects.values('employee__department__name').annotate(total_salary=Sum('salary'))
 
-        # Create a dictionary to store total salary for each department
         department_totals_dict = {entry['employee__department__name']: entry['total_salary'] for entry in department_totals}
 
-        # Add departments with zero total salary
         for department in all_departments:
             department_name = department.name
             if department_name not in department_totals_dict:
                 department_totals_dict[department_name] = 0
 
-        # Create a list of dictionaries to pass to the template
         department_totals_list = [{'department_name': department_name, 'total_salary': total_salary} for department_name, total_salary in department_totals_dict.items()]
 
-        # Assuming you want to display the results in a template
         return render(request, "dep_salary.html", {'departments': department_totals_list})
     
 def salary(request):

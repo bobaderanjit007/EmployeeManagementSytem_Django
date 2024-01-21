@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col col-lg-8 m-auto">
             <h2 class="text-center mt-2">Salary</h2>
-            <a href="/department/salary/" class="btn btn-success">Department Report</a>
+            <a href="/add/salary/" class="btn btn-success"><i class="fa-solid fa-money-bill"></i> Add Salary</a>
+            <a href="/department/salary/" class="btn btn-warning"><i class="fa-solid fa-file"></i> Department Report</a>
             <table class="table table-striped table-hover mt-4">
                 <tr>
                     <th scope="col">#</th>
@@ -18,7 +19,7 @@
                 </tr>
                 {% for sal in salary %}
                 <tr>
-                    <th>{{sal.id}}</th>
+                    <th>{{forloop.counter}}</th>
                     <td>{{sal.employee}}</td>
                     <td>{{sal.salary}}</td>
                     <td>{{sal.start_date}}</td>

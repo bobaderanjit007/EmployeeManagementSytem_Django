@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        .home-con{
+            height: 82vh;
+            background-image: url('https://dinerosoftware.com/wp-content/uploads/2018/12/dinero-hero-orange.jpg');
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .home-con h1{
+            font-size: 60px;
+            font-weight: 700;
+        }
+        .home-con p{
+            font-size: 20px;
+            font-weight: 400;
+        }
+        .btns{
+            z-index: 8;
+            background-color: rgb(0, 98, 160);
+            text-transform: uppercase;
+            cursor: pointer;
+            outline: none;
+            box-shadow: none;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            white-space: nowrap;
+            width: 330px;
+            height: 70px;
+            min-height: 0px;
+            min-width: 0px;
+            max-height: none;
+            max-width: none;
+            text-align: center;
+            line-height: 60px;
+            letter-spacing: 0px;
+            font-weight: 600;
+            font-size: 18px;
+            border-color: transparent;
+            border-radius: 30px;
+            backdrop-filter: none;
+            filter: none;
+            transform-origin: 50% 50%;
+            opacity: 1;
+            transform: translate(0px, 0px);
+            visibility: visible;
+            border-width: 0px;
+            border-style: none;
+            margin:0 15px;
+        }
+
+        .btns:hover{
+            transition: all 0.5s;
+            background-color: white;
+            color: black;
+        }
+    </style>
+    <div class="container-fluid home-con">
+        <h1>YOUR VISION, OUR CREATION</h1>
+        <p class="text-center">Dinero Software Pvt. Ltd. was started as an initiative to bring all the outsourcing of our other companies, in house.</p>
+        <div class="row mt-5">
+            <a href="/employees/" class="btns"><i class="fa-solid fa-users mx-1"></i> Employee</a>
+            <a href="/departments/" class="btns"><i class="fa-solid fa-briefcase mx-1"></i> Department</a>
+            <a href="/salary/" class="btns"><i class="fa-solid fa-comments-dollar mx-1"></i> Salary</a>
+        </div>
+    </div>
+{% endblock content %}

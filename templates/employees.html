@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col col-lg-12 m-auto">
             <h2 class="text-center mt-2">Employees</h2>
+            <a href="/add/employee/" class="btn btn-success"><i class="fa-solid fa-user-plus"></i> Add Employee</a>
             <table class="table table-striped table-hover mt-4">
                 <tr>
                     <th scope="col">#</th>
@@ -19,7 +20,7 @@
                 </tr>
                 {% for employee in employees %}
                 <tr>
-                    <th>{{employee.id}}</th>
+                    <th>{{forloop.counter}}</th>
                     <td>{{employee.name}}</td>
                     <td>{{employee.email}}</td>
                     <td>{{employee.address}}</td>
