@@ -14,25 +14,71 @@
                     </div>
                 </div>
             </div>
-            <h4 class=" mt-4">Employees : </h4>
-            <table class="table table-striped table-hover">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Designation</th>
-                </tr>
-                {% for employee in employees %}
-                <tr>
-                    <th>{{employee.id}}</th>
-                    <td>{{employee.name}}</td>
-                    <td>{{employee.email}}</td>
-                    <td>{{employee.address}}</td>
-                    <td>{{employee.designation}}</td>
-                </tr>
-                {% endfor %}
-            </table>
+            <div class="container">
+                <div class="row">
+                    <div class="col col-lg-6">
+                        <h4 class=" mt-4">Team Leads : </h4>
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Show</th>
+                            </tr>
+                            {% if team_leads %}
+                            
+                            {% for team_lead in team_leads %}
+                            <tr>
+                                <th>{{team_lead.id}}</th>
+                                <td>{{team_lead.name}}</td>
+                                <td>{{team_lead.email}}</td>
+                                <td>
+                                    <form method="POST">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="team_lead_id" value="{{team_lead.id}}">
+                                        <button type="submit" class="btn btn-sm btn-success">Associates</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">No Record Found</td>
+                            </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                    {% if associates %}
+                    <div class="col col-lg-6 pt-2">
+                        <h4 class=" mt-4">Associates : </h4>
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Report to</th>
+                            </tr>
+                            {% if team_leads %}
+                            
+                            {% for associate in associates %}
+                            <tr>
+                                <th>{{associate.id}}</th>
+                                <td>{{associate.name}}</td>
+                                <td>{{associate.email}}</td>
+                                <td>{{associate.reporting_manager}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">No Record Found</td>
+                            </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

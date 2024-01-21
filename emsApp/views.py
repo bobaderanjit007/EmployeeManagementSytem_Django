@@ -8,6 +8,8 @@ from django.db.models import Sum
 def home(request):
     return render(request, "base.html")
 
+# Employee Module
+
 def add_emp(request):
     
     if request.method == 'POST':
@@ -88,6 +90,8 @@ def employees(request):
     return render(request,"employees.html", context)
 
 
+# Department Module
+
 def add_department(request):
     
     if request.method == 'POST':
@@ -133,20 +137,45 @@ def departments(request):
 
 
 def check_hierarchy(request, dep_id):
-    try:
-        department  = Department.objects.get(id = dep_id)
-        manager = Employee.objects.get(department = department, designation='Manager')
-        employees = Employee.objects.filter(department = department).exclude(designation='Manager')
-        context = {
-            'manager' : manager,
-            'employees' : employees,
-            'department': department
-        }
-    except Employee.DoesNotExist:
-        messages.error(request,"Manager not found for this department !")
-        return render(request, "hierarchy.html", {'error_message': 'Department not found'})
+    if request.method == 'POST':
+        try:
+            team_lead_id = request.POST['team_lead_id']
+            lead = Employee.objects.get(id = team_lead_id)
 
-    return render(request,"hierarchy.html", context)
+            department  = Department.objects.get(id = dep_id)
+            manager = Employee.objects.get(department = department, designation='Manager')
+            team_leads = Employee.objects.filter(department = department, designation='TL')
+            associates = Employee.objects.filter(department = department, designation='Associate', reporting_manager = lead)
+            context = {
+                'manager' : manager,
+                'team_leads' : team_leads,
+                'associates' : associates,
+                'department': department
+            }
+        except Employee.DoesNotExist:
+            messages.error(request,"Manager not found for this department !")
+            return render(request, "hierarchy.html", {'error_message': 'Department not found'})
+
+        return render(request,"hierarchy.html", context)
+
+    else:
+        try:
+            department  = Department.objects.get(id = dep_id)
+            manager = Employee.objects.get(department = department, designation='Manager')
+            team_leads = Employee.objects.filter(department = department, designation='TL')
+            context = {
+                'manager' : manager,
+                'team_leads' : team_leads,
+                'department': department
+            }
+        except Employee.DoesNotExist:
+            messages.error(request,"Manager not found for this department !")
+            return render(request, "hierarchy.html", {'error_message': 'Department not found'})
+
+        return render(request,"hierarchy.html", context)
+
+
+# Salary Module
 
 def add_salary(request):
     employees = Employee.objects.all()
